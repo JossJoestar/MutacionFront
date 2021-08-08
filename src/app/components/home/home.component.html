@@ -1,0 +1,45 @@
+<!-- SPINNER -->
+<ngx-spinner bdColor="rgba(0, 0, 0, 0.8)" size="medium" color="#fff" type="timer" [fullScreen]="true">
+    <p style="color: white">Consultando...</p>
+</ngx-spinner>
+
+<!-- CONSULTA DE ADN -->
+<div class="general">
+    <h2 style="color: #676767;">Consultar Mutación en ADN</h2>
+    <p style="color: #8b8b8b">
+        El ADN introducido debe contener el siguiente formato: ATGCGA,CAGTGC,TTATGT,AGAAGG,CCCCTA,TCACTG
+    </p>
+    <div class="input-group mb-3">
+        <input type="text" style="text-transform: uppercase" class="form-control" placeholder="Introduce el ADN"
+            aria-label="dna" (input)="inputValidator($event)" aria-describedby="dna" />
+        <div class="input-group-append">
+            <button (click)="onClick()" class="btn btn-outline-secondary" type="button">
+                Consultar
+            </button>
+        </div>
+    </div>
+    <br />
+    <br />
+
+    <!-- TABLA DE 10 ULTIMOS ADN -->
+    <h2 style="color: #676767;">Ultimas Mutaciones Agregadas</h2>
+    <table class="table table-bordered">
+        <thead class="table-dark">
+            <tr>
+                <th>Cadena de DNA</th>
+                <th>Numero de mutaciones</th>
+                <th>Resultado</th>
+            </tr>
+        </thead>
+        <tbody *ngFor="let dna of dnas">
+            <tr>
+                <td>{{ dna.ChainValue }}</td>
+                <td>{{ dna.MutationCount}}</td>
+                <td>
+                    <p *ngIf="dna.IsMutante == 1">Es mutación</p>
+                    <p *ngIf="dna.IsMutante == 0">No es mutación</p>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>
